@@ -31,10 +31,7 @@ foreach ($ops[0] as $operator){
     //    get the name
     $name = get_name($operator);
     $operators[$i]['name'] = $name;
-//    echo '<pre>';
-//    var_dump($operators[$i]['name']);
-//    echo '<pre>';
-
+//increment the counter
     $i++;
 }
 
