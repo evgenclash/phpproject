@@ -1,7 +1,7 @@
 <?php
 
 include_once ('/Users/mac/PhpstormProjects/simplehtmldom_1_9_1/simple_html_dom.php');
-include_once ('functions/curl.php');
+include_once('functions/functions.reg.php');
 
 $context = stream_context_create(
     array(
