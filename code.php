@@ -5,11 +5,7 @@ $url = 'https://www.ubisoft.com/en-gb/game/rainbow-six/siege/game-info/operators
 
 $header = 'https://www.ubisoft.com/';
 
-$operators = [
-    [
-
-    ]
-];
+$operators =[];
 $i = 0;
 //get html code of the page using CURL
 $html = curl_get($url);
