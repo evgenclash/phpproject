@@ -66,6 +66,6 @@ function get_name_str($html){
 //    тут используем strrpos чтобы узнать позицию последнего alt=
     $endpos = strrpos($html, '</span>');
 //    +26 это длина ("oplist__card__icon" src=") -28 это -26 которые добавил  в начале и за это-2 "space
-    $name = substr($html, $startpos + 6,$endpos - $startpos);
+    $name = substr($html, $startpos + 6,$endpos - $startpos - 6);
     return $name;
 }
