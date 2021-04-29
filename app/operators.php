@@ -1,7 +1,7 @@
 <?php
 
 
-class operators
+class Operators
 {
 //    properties
     public string $name;
