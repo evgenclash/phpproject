@@ -4,30 +4,42 @@
 class Operators
 {
 //    properties
-    public string $name;
-    public string $operatorUri;
-    public string $cardUri;
-    public string $cardLogoUri;
+    private string $name;
+    private string $operatorUri;
+    private string $cardUri;
+    private string $cardLogoUri;
 //    methods
     public function __construct($name){
         $this->name = $name;
     }
 
-    public function set_operator_uri($operatorUri){
+    public function setOperatorUri($operatorUri){
         $this->operatorUri = $operatorUri;
     }
 
-    public function set_card_uri($cardUri){
+    public function setCardUri($cardUri){
         $this->cardUri = $cardUri;
     }
 
-    public function set_logo_uri($logoUri){
+    public function setLogoUri($logoUri){
         $this->cardLogoUri = $logoUri;
     }
 
-    public function __get($name){
+    public function getName(){
 
         return $this->name;
-}
+    }
+
+    public function getOperatorUri(){
+        return $this -> operatorUri;
+    }
+
+    public function getCardUri(){
+        return $this -> cardUri;
+    }
+
+    public function getCardLogoUri(){
+        return $this -> cardLogoUri;
+    }
 
 }

@@ -22,22 +22,22 @@ foreach ($ops[0] as $i => $operator){
     $name = new Operators($name);
 //get the operatorsUri
     $operatorUri = get_operatorUri($operator);
-    $name->set_operator_uri($header. $operatorUri);
+    $name->setOperatorUri($header. $operatorUri);
 //    get the cardLogoUri
     $cardLogoUri = get_cardLogoUri($operator);
-    $name->set_logo_uri($cardLogoUri);
+    $name->setLogoUri($cardLogoUri);
 //    get the cardUri
     $cardUri = get_cardUri($operator);
-    $name->set_card_uri($cardUri);
+    $name->setCardUri($cardUri);
 //добавил все обьекты в массив(мне кажется что это нужно делать)
     $objectOperators[] = $name;
 }
 //вывел данные из обьектов
 foreach ($objectOperators as $operator){
-    echo $operator->name. '<br>';
-    echo $operator->operatorUri. '<br>';
-    echo $operator->cardUri. '<br>';
-    echo $operator->cardLogoUri. '<br>'. '<br>';
+    echo $operator->getName(). '<br>';
+    echo $operator->getOperatorUri(). '<br>';
+    echo $operator->getcardUri(). '<br>';
+    echo $operator->getCardLogoUri(). '<br>'. '<br>';
 }
 
 
