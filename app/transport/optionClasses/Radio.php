@@ -6,13 +6,13 @@ namespace app\transport;
 
 class Radio
 {
-    private string $work ;
+    private string $work;
     private string $type = "FM";//Default FM
     private int $volume;//default 0
     private static int $maxVolume = 100;
 
 
-    public function __construct($volume = 10)
+    public function __construct($volume)
     {
         $this->work = "On";
         $this->volume = $volume;
@@ -20,14 +20,19 @@ class Radio
 
     public function setVolume(int $volume): void
     {
-        if ($this->checkMaxVolume($volume)){
+        if ($this->checkMaxVolume($volume)) {
             $this->volume = $volume;
         }
     }
 
-    public function setType(string $type): void
+    public function setAM(): void
     {
-        $this->type = $type;
+        $this->type = "AM";
+    }
+
+    public function setFM(): void
+    {
+        $this->type = "FM";
     }
 
     public function getType(): string
@@ -57,7 +62,7 @@ class Radio
     {
         $newVolume = $this->volume + $volume;
 
-        if ($this->checkMaxVolume($newVolume)){
+        if ($this->checkMaxVolume($newVolume)) {
             $this->volume = $newVolume;
         }
     }
@@ -70,7 +75,7 @@ class Radio
 
     private function checkMaxVolume($volume): bool
     {
-        if ($volume < self::$maxVolume){
+        if ($volume < self::$maxVolume) {
             return true;
         }
         return false;
