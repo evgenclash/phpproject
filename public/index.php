@@ -26,15 +26,18 @@ $operatorUri = get_html2($str2->getOperatorUri());
 //$res1 = $parsing->parseCategory($res);
 $random = $collection->getAllOperators();
 
-foreach ($random as $okn){
-    $weaponCollectionAll = $okn->getArmorCollection()->getAllWeapons();
+//foreach ($random as $okn){
+//    $weaponCollectionAll = $okn->getArmorCollection()->getAllWeapons();
 
-    foreach ($weaponCollectionAll as $key=>$col){
+
+//    foreach ($weaponCollectionAll as $key=>$col){
         echo '<pre>';
-        var_dump($col);
-        echo '<br>'. $key. '<br>'. '<br>';
-    }
-}
+        var_dump($random);
+        echo '<br>'. '<br>'. '<br>'. '<br>';
+//        var_dump($col);
+//        echo '<br>'. $key. '<br>'. '<br>';
+//    }
+//}
 
 
 
