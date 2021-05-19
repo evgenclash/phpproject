@@ -14,6 +14,9 @@ include_once 'Sportcar.php';
 include_once 'Radio.php';
 include_once 'Conditioner.php';
 include_once 'index.php';
+include_once 'Camera.php';
+include_once 'GearBox.php';
+include_once 'Optic.php';
 
 
 

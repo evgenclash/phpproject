@@ -12,7 +12,7 @@ class Conditioner
     public function setConditioner(int $temp = 22)
     {
 
-        if ($this->work === "Off"){
+        if ($this->work === "Off") {
             $this->work = "On";
         }
         $this->temperature = $temp;

@@ -1,5 +1,4 @@
 <?php
-
 //include_once ('main.php');
 function curl_get($url, $referer = 'https://www.google.com'){
 
@@ -22,7 +21,7 @@ function get_html2($url){
 //    этот контекст для того чтобы сайт который мы парсим увидел заголовок что это реальный человек заходит с браузера,как я понял это такая защита от получения инфы с сайта с помощю кода
 
 //    array используется (я не уверен но думаю изза того что нашему user agent присваивается заголовок от разных браузеров
-    $context = stream_context_create(
+    $context =stream_context_create(
         array(
             "http" => array(
                 "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (HTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
@@ -121,3 +120,64 @@ function get_name_str($html){
     $name = substr($html, $startpos + 6,$endpos - $startpos);
     return $name;
 }
+
+
+function get_side($html){
+    $startpos = strpos($html, '<div class="operator__header__side__detail');
+    preg_match('#span\s*?>([^>]*?)<#',$html,$side, PREG_OFFSET_CAPTURE, $startpos);
+    return $side[1][0];
+}
+
+function get_page($html){
+/*    preg_match('#<div[^>]+?class\s*?=\s*?(["\'])operator__header__infos\1[^>]*?>(.+?)<div class="promo operator__ability__row "#su', $html, $ops);*/
+    preg_match('#<div class="operator__header__infos">(.+?)</div>.+?</div>#su', $html, $ops);
+    var_dump($ops);
+echo '<br>'.htmlentities($ops[1]);
+    return $ops[0];
+}
+
+function get_page_str($html){
+    $startpos = 0;
+    $startpos = strpos($html, '<div class="operator__header__infos">',$startpos);
+    $endpos = strpos($html, '<div class="promo operator__ability__row');
+    $operatorUri = substr($html, $startpos ,$endpos - $startpos);
+
+    return $operatorUri;
+}
+
+function get_stats($html){
+    $startpos = findStats($html);
+    foreach ($startpos as $ok){
+        $stats = get_stats_str($ok, $stats );
+    }
+
+    return $stats;
+}
+
+function findStats($html){
+    $startpos = 0;
+    $result = [];
+    while (false !==($startpos = strpos($html, '<div class="operator__header__stat"',$startpos+5))){
+        $endpos = strpos($html, '</div></div></div></div>', $startpos);
+        $add = substr($html, $startpos, $endpos - $startpos);
+        $result[] = $add;
+    }
+
+    return $result;
+}
+
+function get_stats_str($html, $stats){
+    $counter = 0;
+    $startpos = strpos($html, '<span>');
+    $endpos = strpos($html, '</span>');
+    $key = substr($html, $startpos, $endpos - $startpos);
+    while (false !== ($startpos = strpos($html, '<div class="react-rater-star is-disabled is-active"', $startpos +2))){
+        $counter++;
+    }
+    $stats[$key] = $counter;
+
+    return $stats;
+}
+
+
+
