@@ -26,4 +26,5 @@ require_once '../app/ArmorCollection.php';
 require_once '../app/Parser/HTML.php';
 require_once '../app/Parser/OperatorParsingFunctions.php';
 require_once '../app/Parser/ArmorParsingFunctions.php';
+require_once '../app/DBwrite.php';
 

@@ -1,43 +1,36 @@
 <?php
 
+use App\DBwrite;
 use App\Operator;
 use App\Parser\OperatorsParser;
 use App\TeamManager;
 
 require_once '../bootstrap/autoload.php';
 
+echo 'star';
 
-//Initiate parsing
-$parsing = new OperatorsParser();
-//start parsing and create collection object
-$collection = $parsing->parse();
+$sqlDB = new DBwrite();
 
-//$team = new TeamManager($collection);
-//echo '<pre>';
-//echo var_dump($team->buildTeam());
-//echo '<pre>';
+$sqlCheck = $sqlDB->checkDB();
+echo $sqlCheck. '<hr>';
+if ($sqlCheck < 60){
+    ////Initiate parsing
+    $parsing = new OperatorsParser($sqlDB);
+    //start parsing and create collection object
+    $collection = $parsing->parse();
+    //
+    $team = new TeamManager($collection);
 
-$str2 = $collection->findByName('Finka');
-echo strcmp('https://www.ubisoft.com/en-gb/game/rainbow-six/siege/game-info/operators/lion', $str2->getOperatorUri()). '<br>';
-$operatorUri = get_html2($str2->getOperatorUri());
+    $teams = $team->buildTeam();
 
-//$res = $parsing->get_armor_pg($str2);
-////echo htmlentities($res);
-//$res1 = $parsing->parseCategory($res);
-$random = $collection->getAllOperators();
+    $sqlDB->writeIntoBDTeam($teams,1);
 
-//foreach ($random as $okn){
-//    $weaponCollectionAll = $okn->getArmorCollection()->getAllWeapons();
+    ////echo '<pre>';
+    //echo var_dump($team->buildTeam());
+    //echo '<pre>'
+}
 
-
-//    foreach ($weaponCollectionAll as $key=>$col){
-        echo '<pre>';
-        var_dump($random);
-        echo '<br>'. '<br>'. '<br>'. '<br>';
-//        var_dump($col);
-//        echo '<br>'. $key. '<br>'. '<br>';
-//    }
-//}
+;
 
 
 

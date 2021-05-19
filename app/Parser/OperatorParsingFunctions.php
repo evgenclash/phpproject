@@ -129,9 +129,12 @@ class OperatorParsingFunctions
 
     public function get_stats($html)
     {
-        $startpos = findStats($html);
+        $stats = array();
+        $startpos = $this->findStats($html);
+
         foreach ($startpos as $ok) {
-            $stats = get_stats_str($ok, $stats);
+            $stat = $this->get_stats_str($ok);
+            $stats = array_merge($stats,$stat);
         }
 
         return $stats;
@@ -150,12 +153,12 @@ class OperatorParsingFunctions
         return $result;
     }
 
-    public function get_stats_str($html, $stats)
+    public function get_stats_str($html)
     {
         $counter = 0;
         $startpos = strpos($html, '<span>');
         $endpos = strpos($html, '</span>');
-        $key = substr($html, $startpos, $endpos - $startpos);
+        $key = substr($html, $startpos + 6, $endpos - $startpos -6);
         while (false !== ($startpos = strpos($html, '<div class="react-rater-star is-disabled is-active"', $startpos + 2))) {
             $counter++;
         }
