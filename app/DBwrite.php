@@ -32,13 +32,13 @@ class DBwrite
             $difficulty = 0;
         }
 
-//        mysqli_query($this->sqlCon,"INSERT INTO operators(Name, Side, PageUri, logoUri, photoUri) VALUES ('$name', '$side', '$operatorUri', '$cardLogoUri', '$cardUri')");
-//        mysqli_query($this->sqlCon, "INSERT INTO Stats(Name, Speed, Armor, Difficulty) VALUES ('$name', '$speed', '$armor', '$difficulty')");
+        mysqli_query($this->sqlCon,"INSERT INTO operators(Name, Side, PageUri, logoUri, photoUri) VALUES ('$name', '$side', '$operatorUri', '$cardLogoUri', '$cardUri')");
+        mysqli_query($this->sqlCon, "INSERT INTO Stats(Name, Speed, Armor, Difficulty) VALUES ('$name', '$speed', '$armor', '$difficulty')");
     }
 
     public function writeIntoDBWeapon($name, $type, $category, $photoUri)
     {
-//        mysqli_query($this->sqlCon,"INSERT INTO weapons(Name, type, category, photoUri) VALUES ('$name', '$type', '$category', '$photoUri')");
+        mysqli_query($this->sqlCon,"INSERT INTO weapons(Name, type, category, photoUri) VALUES ('$name', '$type', '$category', '$photoUri')");
     }
 
     public function createConnection()

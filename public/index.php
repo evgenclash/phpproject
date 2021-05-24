@@ -13,7 +13,7 @@ $sqlDB = new DBwrite();
 
 $sqlCheck = $sqlDB->checkDB();
 echo $sqlCheck. '<hr>';
-if ($sqlCheck < 60){
+if ($sqlCheck < 50){
     ////Initiate parsing
     $parsing = new OperatorsParser($sqlDB);
     //start parsing and create collection object
