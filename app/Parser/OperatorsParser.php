@@ -6,6 +6,7 @@ namespace App\Parser;
 
 use App\Armor;
 use App\ArmorCollection;
+use App\DBwrite;
 use App\Operator;
 use App\OperatorsCollection;
 
@@ -13,12 +14,16 @@ class OperatorsParser
 {
     private const URI = 'https://www.ubisoft.com/en-gb/game/rainbow-six/siege/game-info/operators?fbclid=IwAR0hE7Rjar0iT52mQtp9FaYL5ezVY3I_Th_KnCpH2ExvLlOE0eHKP6s-kTo&isSso=true&refreshStatus=noLoginData';
     private const HEADER = 'https://www.ubisoft.com';
-    private ArmorCollection $armorCollection;
     private OperatorParsingFunctions $opParsingFunctions;
     private HTML $getHtml;
     private ArmorParsingFunctions $armorParsingFunctions;
+    private DBwrite $sqlDB;
 
     // TODO place here all the methods for parsing page of operators
+    public function __construct($sql)
+    {
+        $this->sqlDB = $sql;
+    }
 
     public function parse(): OperatorsCollection
     {
@@ -77,6 +82,9 @@ class OperatorsParser
 //        get the stats of operators
         $stats = $this->opParsingFunctions->get_stats($headerPage);
         $operatorObj->setStats($stats);
+//        write operators to DATABASE
+        $this->sqlDB->writeIntoDBOperator($name, $side, $stats, $operatorUri, $cardLogoUri, $cardUri);
+
 //        get armorLoad
         $armor = $this->buildArmor($page);
         $operatorObj->setArmorCollection($armor);
@@ -84,9 +92,11 @@ class OperatorsParser
         return $operatorObj;
     }
 
-    function buildArmor($html)
+    function buildArmor($html): ArmorCollection
     {
         $loadout = $this->armorParsingFunctions->get_armor_pg($html);
+//        $owner = $this->armorParsingFunctions->parseOperatorName($html);
+//        echo $owner;
         $armorCollection = new ArmorCollection();
         $categories = $this->armorParsingFunctions->parseCategory($loadout);
 
@@ -103,6 +113,10 @@ class OperatorsParser
                 $armorObj->setType($type);
                 $photoUri = $this->armorParsingFunctions->parsePhotoUri($armor);
                 $armorObj->setPhotoUri($photoUri);
+
+                if ($armorCollection->checkUnique($armorObj)){
+                    $this->sqlDB->writeIntoDBWeapon($name, $type, $weaponCategory, $photoUri);
+                }
 
                 $armorCollection->addArmor($armorObj);
             }

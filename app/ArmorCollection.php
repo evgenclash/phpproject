@@ -26,7 +26,7 @@ class ArmorCollection
             case 'Unique Ability':
                 $this->uniqueAbility[] = $armor;
                 break;
-
+            default:
                 $this->primaryWeapon[] = $armor;
         }
 //
@@ -34,12 +34,12 @@ class ArmorCollection
 
     public function getAllWeapons(): array
     {
-        $weapons['PrimaryWeapon'] = $this->primaryWeapon;
-        $weapons['SecondaryWeapon'] = $this->secondaryWeapon;
-        $weapons['Gadget'] = $this->gadget;
-        $weapons['UniqueAbility'] = $this->uniqueAbility;
-
-        return $weapons;
+        return [
+            'PrimaryWeapon' => $this->primaryWeapon,
+            'SecondaryWeapon' => $this->secondaryWeapon,
+            'Gadget' => $this->gadget,
+            'UniqueAbility' => $this->uniqueAbility,
+        ];
     }
 
     public function getPrimaryWeapon(): array
@@ -60,5 +60,18 @@ class ArmorCollection
     public function getUniqueAbility(): array
     {
         return $this->uniqueAbility;
+    }
+
+    public function checkUnique(Armor $armor): bool
+    {
+        foreach ($this->getAllWeapons() as $weapon){
+
+            if ($weapon === $armor){
+
+                return false;
+            }
+        }
+
+        return true;
     }
 }

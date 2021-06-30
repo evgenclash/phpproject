@@ -29,6 +29,7 @@ class OperatorsCollection
                 return $op;
             }
         }
+
         return null;
     }
 
