@@ -162,7 +162,7 @@ function findStats($html){
         $add = substr($html, $startpos, $endpos - $startpos);
         $result[] = $add;
     }
-
+    var_dump($result);
     return $result;
 }
 

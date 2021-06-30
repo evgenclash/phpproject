@@ -58,8 +58,7 @@ class TeamManager
 
         while(!$team->isComplete()){
             $member = $this->operators->getRandom();
-            if ($team->isUnique($member)){
-                if ($member->getSide() == 'Attacker')
+            if ($team->isUnique($member) && $member->getSide() === 'Attacker'){
                 $team->addMember($member);
             }
         }
@@ -74,8 +73,7 @@ class TeamManager
 
         while(!$team->isComplete()){
             $member = $this->operators->getRandom();
-            if ($team->isUnique($member)){
-                if ($member->getSide() == 'Defender')
+            if ($team->isUnique($member) && $member->getSide() === 'Defender'){
                     $team->addMember($member);
             }
         }

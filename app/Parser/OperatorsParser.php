@@ -92,7 +92,7 @@ class OperatorsParser
         return $operatorObj;
     }
 
-    function buildArmor($html): ArmorCollection
+    function buildArmor(string $html): ArmorCollection
     {
         $loadout = $this->armorParsingFunctions->get_armor_pg($html);
 //        $owner = $this->armorParsingFunctions->parseOperatorName($html);
