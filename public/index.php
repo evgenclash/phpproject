@@ -13,7 +13,7 @@ $sqlDB = new DBwrite();
 
 $sqlCheck = $sqlDB->checkDB();
 echo $sqlCheck. '<hr>';
-if ($sqlCheck < 50){
+if ($sqlCheck < 60){
     ////Initiate parsing
     $parsing = new OperatorsParser($sqlDB);
     //start parsing and create collection object
@@ -25,12 +25,12 @@ if ($sqlCheck < 50){
 
     $sqlDB->writeIntoBDTeam($teams,1);
 
-    ////echo '<pre>';
-    //echo var_dump($team->buildTeam());
-    //echo '<pre>'
+    echo '<pre>';
+    echo var_dump($team->buildTeam());
+    echo '<pre>';
 }
 
-;
+
 
 
 

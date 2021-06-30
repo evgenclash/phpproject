@@ -129,7 +129,7 @@ class OperatorParsingFunctions
 
     public function get_stats($html)
     {
-        $stats = array();
+        $stats = [];
         $startpos = $this->findStats($html);
 
         foreach ($startpos as $ok) {
